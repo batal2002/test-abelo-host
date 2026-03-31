@@ -1,0 +1,36 @@
+@use '@/styles' as *;
+
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding-top: var(--padding-lg);
+    padding-bottom: var(--padding-lg);
+    min-height: 50vh;
+    text-align: center;
+}
+
+.title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+}
+
+.text {
+    color: var(--color-text-muted);
+    max-width: 28rem;
+}
+
+.link {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@include hover {
+    .link:hover {
+        color: var(--color-primary-hover);
+    }
+}

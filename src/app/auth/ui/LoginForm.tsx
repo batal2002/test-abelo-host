@@ -2,21 +2,22 @@
 
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { FormEvent, useMemo, useState } from 'react'
+import { FormEvent, useState } from 'react'
+
+import { Button } from '@/components/ui/Button'
+import { FormField } from '@/components/ui/FormField'
 
 import s from './LoginForm.module.scss'
 
-type FieldErrors = {
+interface FieldErrors {
     username?: string
     password?: string
 }
 
-function validate(username: string, password: string): FieldErrors {
+const validate = (username: string, password: string): FieldErrors => {
     const errors: FieldErrors = {}
-
     const u = username.trim()
     const p = password.trim()
-
     if (!u) errors.username = 'Username is required'
     else if (u.length < 3) errors.username = 'Minimum 3 characters'
 
@@ -34,8 +35,6 @@ export const LoginForm = () => {
     const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
     const [formError, setFormError] = useState<string | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const canSubmit = useMemo(() => !isSubmitting, [isSubmitting])
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -68,51 +67,32 @@ export const LoginForm = () => {
 
     return (
         <form className={s.form} onSubmit={onSubmit} noValidate>
-            <label className={s.field}>
-                <span className={s.label}>Username</span>
-                <input
-                    className={s.input}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    autoComplete="username"
-                    inputMode="text"
-                    placeholder="username"
-                    aria-invalid={Boolean(fieldErrors.username)}
-                    aria-describedby={fieldErrors.username ? 'username-error' : undefined}
-                    disabled={isSubmitting}
-                />
-                {fieldErrors.username && (
-                    <span id="username-error" className={s.error}>
-                        {fieldErrors.username}
-                    </span>
-                )}
-            </label>
+            <FormField
+                label="Username"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="username"
+                disabled={isSubmitting}
+                error={fieldErrors.username}
+            />
 
-            <label className={s.field}>
-                <span className={s.label}>Password</span>
-                <input
-                    className={s.input}
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
-                    placeholder="password"
-                    aria-invalid={Boolean(fieldErrors.password)}
-                    aria-describedby={fieldErrors.password ? 'password-error' : undefined}
-                    disabled={isSubmitting}
-                />
-                {fieldErrors.password && (
-                    <span id="password-error" className={s.error}>
-                        {fieldErrors.password}
-                    </span>
-                )}
-            </label>
+            <FormField
+                label="Password"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="password"
+                disabled={isSubmitting}
+                error={fieldErrors.password}
+            />
 
             {formError && <div className={s.formError}>{formError}</div>}
 
-            <button className={s.button} type="submit" disabled={!canSubmit}>
-                {isSubmitting ? 'Logging in…' : 'Login'}
-            </button>
+            <Button className={s.button} type="submit" isLoading={isSubmitting} loadingText="Logging in...">
+                Login
+            </Button>
         </form>
     )
 }

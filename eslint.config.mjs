@@ -3,10 +3,10 @@ import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
 import prettierConfig from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import'
-
+import noRelativeImport from 'eslint-plugin-no-relative-import-paths'
 import prettier from 'eslint-plugin-prettier'
-
-import globals from 'globals'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import unusedImports from 'eslint-plugin-unused-imports'
 
 const eslintConfig = defineConfig([
     ...nextVitals,
@@ -17,24 +17,33 @@ const eslintConfig = defineConfig([
                 projectService: true,
                 tsconfigRootDir: import.meta.dirname,
             },
-            globals: {
-                ...globals.node,
-                ...globals.es2025,
-            },
         },
-        plugins: { prettier, importPlugin },
+        plugins: {
+            prettier,
+            importPlugin,
+            'unused-imports': unusedImports,
+            'simple-import-sort': simpleImportSort,
+            'no-relative-import-paths': noRelativeImport,
+        },
         rules: {
             'prettier/prettier': 'error',
             'no-console': 'warn',
 
-            'import/order': [
-                'error',
+            'unused-imports/no-unused-imports': 'warn',
+            'import/extensions': [
+                'warn',
                 {
-                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-                    'newlines-between': 'always',
-                    alphabetize: { order: 'asc', caseInsensitive: true },
+                    js: 'never',
+                    jsx: 'never',
+                    ts: 'never',
+                    tsx: 'never',
+                    css: 'always',
+                    svg: 'always',
+                    webp: 'always',
                 },
             ],
+            'simple-import-sort/imports': 'error',
+            'simple-import-sort/exports': 'error',
 
             '@typescript-eslint/no-unused-vars': [
                 'warn',
@@ -63,14 +72,11 @@ const eslintConfig = defineConfig([
             ],
             '@typescript-eslint/no-unsafe-assignment': 'off',
             '@typescript-eslint/restrict-template-expressions': 'off',
-            '@typescript-eslint/no-misused-promises': [
-                2,
-                { checksVoidReturn: { attributes: false } },
-            ],
+            '@typescript-eslint/no-misused-promises': [2, { checksVoidReturn: { attributes: false } }],
         },
     },
     prettierConfig,
-    globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+    globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'next-auth.d.ts']),
 ])
 
 export default eslintConfig

@@ -1,0 +1,35 @@
+@use '@/styles' as *;
+
+.root {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-light);
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+
+    &:disabled {
+        opacity: 0.55;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}
+
+@include hover {
+    .root:hover:not(:disabled) {
+        background: var(--color-primary-hover);
+    }
+}
+
+.loadingContent {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}

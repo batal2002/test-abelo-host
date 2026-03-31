@@ -1,0 +1,13 @@
+.container {
+    margin-top: auto;
+    background-color: var(--color-dark);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-md);
+    color: var(--color-text-light);
+}

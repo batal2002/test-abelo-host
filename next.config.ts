@@ -1,8 +1,21 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
+    reactCompiler: true,
+    allowedDevOrigins: ['192.168.0.116'],
+    output: 'standalone',
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.dummyjson.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'dummyjson.com',
+            },
+        ],
+    },
+}
 
-export default nextConfig;
+export default nextConfig
