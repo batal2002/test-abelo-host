@@ -1,0 +1,89 @@
+@use '@/shared/styles' as *;
+
+.root {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-md);
+}
+
+.btn {
+    width: fit-content;
+    padding: var(--space-sm) var(--space-md);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.45;
+    }
+
+    &.active {
+        color: var(--color-text-light);
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        cursor: default;
+    }
+
+    &.preload {
+        color: var(--color-primary);
+    }
+}
+
+@include hover {
+    .btn:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
+}
+
+.pages {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    min-width: 0;
+}
+
+.ellipsis {
+    padding: 0 var(--space-xs);
+}
+
+.prev {
+    justify-self: end;
+}
+
+.next {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+@include up(sm) {
+    .root {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: auto;
+    }
+
+    .prev {
+        justify-self: end;
+    }
+
+    .pages {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+    }
+
+    .next {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: start;
+    }
+}
+

@@ -5,10 +5,10 @@ import { Inter } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
 import { ReactNode } from 'react'
 
-import { auth } from '@/auth/auth'
-import { Footer } from '@/components/layout/Footer'
-import { Header } from '@/components/layout/Header'
-import { siteConfig } from '@/config/siteConfig'
+import { auth } from '@/shared/auth/auth'
+import { siteConfig } from '@/shared/config/siteConfig'
+import { Footer } from '@/shared/layout/Footer'
+import { Header } from '@/shared/layout/Header'
 
 const inter = Inter({
     subsets: ['latin'],

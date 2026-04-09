@@ -1,0 +1,81 @@
+@use '@/shared/styles' as *;
+
+.container {
+    background-color: var(--color-dark);
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.topBar {
+    background-color: var(--color-header-top);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--padding-sm);
+    padding-bottom: var(--padding-sm);
+    color: var(--color-text-light);
+    gap: var(--space-sm);
+}
+
+.brandBar {
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-md);
+}
+
+.brandLink {
+    color: var(--color-text-light);
+}
+
+.brandTitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+}
+
+.brandDot {
+    color: var(--color-primary);
+}
+
+.social {
+    display: flex;
+    gap: var(--space-sm);
+    min-width: 0;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+
+@include hover {
+    .link:hover {
+        color: var(--color-text-muted);
+    }
+}
+
+.linkText {
+    display: none;
+}
+
+@include up(md) {
+    .header {
+        gap: var(--space-md);
+    }
+
+    .brandTitle {
+        font-size: 34px;
+    }
+
+    .social {
+        gap: var(--space-md);
+    }
+
+    .linkText {
+        display: inline;
+    }
+}
+

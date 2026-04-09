@@ -27,9 +27,17 @@ const eslintConfig = defineConfig([
         },
         rules: {
             'prettier/prettier': 'error',
-            'no-console': 'warn',
+            'no-console': ['warn', { allow: ['warn', 'error'] }],
 
             'unused-imports/no-unused-imports': 'warn',
+            'no-relative-import-paths/no-relative-import-paths': [
+                'error',
+                {
+                    allowSameFolder: true,
+                    rootDir: 'src',
+                    prefix: '@',
+                },
+            ],
             'import/extensions': [
                 'warn',
                 {

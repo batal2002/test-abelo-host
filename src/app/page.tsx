@@ -1,4 +1,5 @@
-import { ProductList } from './_components/catalog'
+import { ProductList } from '@/features/catalog'
+
 import s from './page.module.scss'
 
 export default function Home() {

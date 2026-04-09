@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation'
 
-import { auth } from '@/auth/auth'
+import { LoginForm } from '@/features/auth'
+import { auth } from '@/shared/auth/auth'
 
 import s from './page.module.scss'
-import { LoginForm } from './ui/LoginForm'
 
 export default async function AuthPage() {
     const session = await auth()
